@@ -1,0 +1,11 @@
+Django>=1.9
+djangorestframework>=3.3
+pillow
+
+# Optional
+Werkzeug
+django-extensions
+
+
+-e git+git://github.com/BioComputing/django_bcf_cas.git#egg=bcf_cas
+-e git+git://github.com/BioComputing/django-cas.git@1.0.1#egg=cas

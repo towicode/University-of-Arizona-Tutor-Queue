@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block ng_app %}example.app.tutor{% endblock %}
+
+{% block content %}
+{% verbatim %}
+<div ng-controller="EditController">
+    <h5>Queue View</h5>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11">
+                <h3>
+                </h3>
+            </div>
+            <div class="col-md-1">
+                 
+                <button type="button" ng-click="manage()" class="btn btn-primary">
+                    Manage
+                </button>
+            </div>
+        </div>
+        <div class="row" ng-show="!isAdmin">
+            <div class="col-md-12">
+                <form class="form-horizontal">
+                <fieldset>
+                <!-- Form Name -->
+                <legend>Add yourself to the tutor queue</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="textinput">Name</label>  
+                  <div class="col-md-4">
+                  <input id="textinput" ng-model="user" name="textinput" type="text" placeholder="Joe" class="form-control input-md">
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="textinput">Class Number</label>  
+                  <div class="col-md-2">
+                  <input id="textinput" ng-model="class_num" name="textinput" type="text" placeholder="352" class="form-control input-md">
+                  </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="selectbasic">What can we help you with today?</label>
+                  <div class="col-md-4">
+                    <select ng-model="select" id="selectbasic" name="selectbasic" class="form-control">
+                      <option value="1">Conceptual Help</option>
+                      <option value="2">Big Picture Understanding</option>
+                      <option value="3">Coding Basics</option>
+                      <option value="4">Debugging</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="form-group" ng-show="defined()">
+                  <label class="col-md-4 control-label" for="textarea">What is your question?</label>
+                  <div class="col-md-4">                     
+                    <textarea ng-model="question" class="form-control" id="textarea" name="textarea"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group" ng-show="error()">
+                  <label class="col-md-4 control-label" for="textarea">Error</label>
+                  <div class="col-md-4">                     
+                    Sorry at this time the tutoring center cannot help with debugging. Please ask the front-desk worker about sessions on how to debug and how to get assistance debugging your code.
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="singlebutton"></label>
+                  <div class="col-md-4">
+                    <button id="singlebutton" ng-disabled="!defined()" ng-click="save()" name="singlebutton" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+
+                </fieldset>
+                </form>
+
+            </div>
+        </div>
+        <div class="row" ng-if="isAdmin">
+            <div class="col-md-12">
+<!--                 <div class="btn-group">
+                     
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-left"></em> Left
+                    </button> 
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-center"></em> Center
+                    </button> 
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-right"></em> Right
+                    </button> 
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-justify"></em> Justify
+                    </button>
+                </div> -->
+                <div><br><br></div>
+                <div class="row is-flex" ng-repeat="post in posts">
+                    <div class="col-md-3 side">
+                        <h3>
+                            {{post.user}}
+                            <br>
+                            <br>
+                            <br>
+                        </h3>
+                    </div>
+                    <div class="col-md-3 side">
+                         <button ng-if="!post.active" ng-click="markActive(post)"> Mark Active </button>
+                         <button ng-click="delete(post)"> Delete </button>
+                    </div>
+                    <div class="col-md-3 side">
+                        <div class="panel-group" id="panel-{{$index}}">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                     <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-{{$index}}" href="#panel-element-{{$index}}">Preview Question</a>
+                                </div>
+                                <div id="panel-element-{{$index}}" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {{post.question}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 side" >
+                        <div ng-if="!post.active">
+                            Time Waiting:<br>
+                            <timer ng-if="getEpoch(post)" start-time="getEpoch(post)">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+                        </div>
+                        <div ng-if="post.active">
+                            Percent Complete: {{post.abc | number:0}}%<br>
+                            <timer ng-if="getEpoch(post)" end-time="getEpoch(post)">{{minutes}} minutes, {{seconds}} seconds.</timer>
+                            <div class="progress progress-striped active {{post.abc}}"style="height: 100px;"><div class="progress-bar" style="min-width: 2em;width: {{post.abc}}%;"></div> </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{{ block.super }}
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+// Add the CSRF Token
+var app = angular.module('example.app.tutor'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
+</script>
+<style>
+
+.side {
+    border-style:solid;
+    border-width:1px;
+    padding-top:10px;
+}
+.row.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.is-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+* And with max cross-browser enabled.
+* Nobody should ever write this by hand. 
+* Use a preprocesser with autoprefixing.
+*/
+.row.is-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}</style>
+{% endblock %}

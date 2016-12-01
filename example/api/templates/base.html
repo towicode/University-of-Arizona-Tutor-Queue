@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap/dist/css/bootstrap.css" %}">
+<style>
+    .photo img {
+        
+        max-width: 150px;
+        vertical-align: top;
+    }
+    
+    .close {
+        
+        padding: 0 10px;
+    }
+</style>
+</head>
+<body ng-app="{% block ng_app %}example.app.static{% endblock %}">
+<div class="container">
+<div class="content ng-cloak" ng-controller="{% block ng_controller %}AppController{% endblock %}">{% block content %}
+</div>
+{% endblock %}</div>
+</div>
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{% static "underscore/underscore.js" %}"></script>
+<script src="{% static "angular/angular.js" %}"></script>
+<script src="{% static "angular-timer/dist/angular-timer.js" %}"></script>
+ <script src="{% static "angular-resource/angular-resource.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+{% endblock %}
+</body>
+</html>
