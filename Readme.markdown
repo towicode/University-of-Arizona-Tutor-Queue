@@ -1,24 +1,10 @@
-# Django API with Django Rest Framework and AngularJS-Resource
-
-This sample project is the companion of a [blog post](http://kevinastone.github.io/getting-started-with-django-rest-framework-and-angularjs.html) on how to get started with Django Rest Framework and AngularJS.
-
 ## Dependencies
 
 To setup and run the sample code, you're going to need `npm` from NodeJS available to install the frontend code.
+* Node 4.6
+* Python 2.7.+
 
 ## Setup
-
-### Docker
-
-If you have a docker host, you can simply use `docker-compose` to build the example, then open [http://localhost](http://localhost):
-
-```
-docker-compose up
-```
-
-### Manual
-
-You're encouraged to setup a `virtualenv` to work in prior to configuring the dependencies.
 
 1. Install Python Requirements
 
@@ -46,3 +32,52 @@ You're encouraged to setup a `virtualenv` to work in prior to configuring the de
 
         ./manage.py runserver
 
+
+# License #
+This is free and unencumbered software released into the public domain.
+
+
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+
+distribute this software, either in source code form or as a compiled
+
+binary, for any purpose, commercial or non-commercial, and by any
+
+means.
+
+
+
+In jurisdictions that recognize copyright laws, the author or authors
+
+of this software dedicate any and all copyright interest in the
+
+software to the public domain. We make this dedication for the benefit
+
+of the public at large and to the detriment of our heirs and
+
+successors. We intend this dedication to be an overt act of
+
+relinquishment in perpetuity of all present and future rights to this
+
+software under copyright law.
+
+
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+
+OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+For more information, please refer to <http://unlicense.org/>
