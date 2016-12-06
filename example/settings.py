@@ -184,5 +184,4 @@ CAS_PROVIDE_URL_TO_LOGOUT = True
 # !!!!!This is for demonstration only!!!!!
 AUTHENTICATION_BACKENDS = [
     'example.api.auth.AlwaysRootBackend',
-    'bcf_cas.middleware.CASMiddleware',
 ]
