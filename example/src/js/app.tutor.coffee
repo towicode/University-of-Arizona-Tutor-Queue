@@ -2,9 +2,10 @@ app = angular.module 'example.app.tutor', ['example.api', 'example.app.entry', '
 
 app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
     
+    #   unused
     $scope.adminview = 0;
 
-    #Function that switches between Manage and Queue View.
+    #   Function that switches between Manage and Queue View.
     $scope.manage = ->
 
         if $scope.isAdmin
@@ -12,7 +13,6 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
             return
         x = 0
         `if($scope.class_num == 123){x=2;}`
-        console.log(x);
         if x is 2
             $scope.isAdmin = true;
         return true;
@@ -37,6 +37,7 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
 
     #Saves the entry into the database
     $scope.save = ->
+        console.log("clicked");
         $scope.newPost.class_num = $scope.class_num;
         $scope.newPost.question = $scope.question;
         $scope.newPost.user = $scope.user;
@@ -97,15 +98,15 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
     $scope.updatePage = () ->
         $scope.updateTime()
 
+    #   Updates the view from the database every 5 seconds
     $scope.refresh = () ->
-        console.log("5")
         $scope.posts = Entry.query()
 
     setInterval($scope.updatePage, 1000)
     setInterval($scope.refresh, 5000)
 
 
-    #Gets the tutor expiration date.
+    #Gets the tutor expiration time.
     $scope.getEpoch = (post) ->
 
         y = new Date(post.created_time).getTime();

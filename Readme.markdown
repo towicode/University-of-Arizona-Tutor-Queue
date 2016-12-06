@@ -3,6 +3,7 @@
 To setup and run the sample code, you're going to need `npm` from NodeJS available to install the frontend code.
 * Node 4.6
 * Python 2.7.+
+* Highly Reccomend Python Virtual environment
 
 ## Setup
 
@@ -24,13 +25,31 @@ To setup and run the sample code, you're going to need `npm` from NodeJS availab
 
         grunt
 
-5. Setup the Database
+5. Copy contents of bower_components into example/assets
 
-        make create_database; make make_fixtures
+6. Setup the Database
 
-6. Run the Server
+        make create_database;
+
+7. Run the Server
 
         ./manage.py runserver
+
+
+## NOTES ##
+
+1.	The coffeescript source is in src/js, these files get compiled and placed inside the assets folder.
+2.	The main file for front end is app.tutor.coffee, all the functions for the front-end are inside this function with the exception of a few services for talking to the database.
+3.	The models are setup with django. You will find all the code inside the api folder.
+4.	api.py is for creating objects.
+5.	serializer.py converts object between django and javascript
+6.	models.py is how django stores the data in the database.
+7.	models.py also controls what gets logged after a session is created.
+8.	logs of user sessions are stored in the debug.log file
+9.	After running the server you can access the page by going to localhost:8000
+10.	There is a view for a kiosk /tutor
+11.	There is additionally a view for a larger monitor /view (this view cannot control queue)
+
 
 
 # License #
