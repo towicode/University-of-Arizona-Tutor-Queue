@@ -20,4 +20,5 @@ example/api/urls.py
 example/api/management/__init__.py
 example/api/management/commands/__init__.py
 example/api/management/commands/create_users.py
+example/api/migrations/0001_initial.py
 example/api/migrations/__init__.py

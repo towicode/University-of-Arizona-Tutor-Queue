@@ -40,6 +40,13 @@ To setup and run the sample code, you're going to need `npm` from NodeJS availab
 
         ./manage.py runserver
 
+## UPDATING ##
+
+		git pull
+		python manage.py makemigrations
+		python manage.py migrate
+		grunt
+
 
 ## NOTES ##
 
