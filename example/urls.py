@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<template_name>\w+)$', SimpleStaticView.as_view(), name='example'),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'', include('bcf_cas.urls')),
 ]
 
 if settings.DEBUG:

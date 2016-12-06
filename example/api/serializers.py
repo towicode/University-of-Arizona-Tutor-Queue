@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User, Post, Photo, Entry
+from .models import User, Entry
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,25 +17,3 @@ class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry
         exclude = ('created_time',)
-    
-    
-class PostSerializer(serializers.ModelSerializer):
-    author = UserSerializer(required=False)
-    photos = serializers.HyperlinkedIdentityField(view_name='postphoto-list')
-    # author = serializers.HyperlinkedRelatedField(view_name='user-detail', lookup_field='username')
-
-    def get_validation_exclusions(self, *args, **kwargs):
-        # Need to exclude `user` since we'll add that later based off the request
-        exclusions = super(PostSerializer, self).get_validation_exclusions(*args, **kwargs)
-        return exclusions + ['author']
-
-    class Meta:
-        model = Post
-        exclude = ('created_time')
-
-
-class PhotoSerializer(serializers.ModelSerializer):
-    image = serializers.ReadOnlyField(source='image.url')
-
-    class Meta:
-        model = Photo

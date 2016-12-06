@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'example.api',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'bcf_cas',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
