@@ -6,6 +6,3 @@ pillow
 Werkzeug
 django-extensions
 
-
--e git+git://github.com/BioComputing/django_bcf_cas.git#egg=bcf_cas
--e git+git://github.com/BioComputing/django-cas.git@1.0.1#egg=cas
