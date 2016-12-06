@@ -28,7 +28,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="textinput">Name</label>  
+                  <label class="col-md-4 control-label" for="textinput">First Name</label>  
                   <div class="col-md-4">
                   <input id="textinput" ng-model="user" name="textinput" type="text" placeholder="Joe" class="form-control input-md">
                   </div>
@@ -66,7 +66,7 @@
                 <div class="form-group" ng-show="error()">
                   <label class="col-md-4 control-label" for="textarea">Error</label>
                   <div class="col-md-4">                     
-                    Sorry at this time the tutoring center cannot help with debugging. Please ask the front-desk worker about sessions on how to debug and how to get assistance debugging your code.
+                    Sorry at this time the tutoring center cannot help with debugging. Please ask the front-desk worker about sessions on how to debug and/or how to get assistance debugging your code.
                   </div>
                 </div>
 
@@ -85,21 +85,6 @@
         </div>
         <div class="row" ng-if="isAdmin">
             <div class="col-md-12">
-<!--                 <div class="btn-group">
-                     
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-left"></em> Left
-                    </button> 
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-center"></em> Center
-                    </button> 
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-right"></em> Right
-                    </button> 
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-justify"></em> Justify
-                    </button>
-                </div> -->
                 <div><br><br></div>
                 <div class="row is-flex" ng-repeat="post in posts">
                     <div class="col-md-3 side">

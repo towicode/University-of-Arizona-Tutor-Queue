@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block ng_app %}example.app.tutor{% endblock %}
+
+{% block content %}
+{% verbatim %}
+<div ng-controller="EditController">
+    <h5>Queue View</h5>
+        <div class="container-fluid">
+        
+
+        <div class="row" >
+            <div class="col-md-12">
+
+                <div><br><br></div>
+                <div class="row is-flex" ng-repeat="post in posts">
+                    <div class="col-md-6 side">
+                        <h3>
+                            {{post.user}}
+                            <br>
+                            <br>
+                            <br>
+                        </h3>
+                    </div>
+                    <div class="col-md-6 side" >
+                        <div ng-if="!post.active">
+                            Time Waiting:<br>
+                            <timer ng-if="getEpoch(post)" start-time="getEpoch(post)">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+                        </div>
+                        <div ng-if="post.active">
+                            Percent Complete: {{post.abc | number:0}}%<br>
+                            <timer ng-if="getEpoch(post)" end-time="getEpoch(post)">{{minutes}} minutes, {{seconds}} seconds.</timer>
+                            <div class="progress progress-striped active {{post.abc}}"style="height: 100px;"><div class="progress-bar" style="min-width: 2em;width: {{post.abc}}%;"></div> </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+{{ block.super }}
+{% endblock %}
+
+{% block js %}
+{{ block.super }}
+<script>
+// Add the CSRF Token
+var app = angular.module('example.app.tutor'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
+</script>
+<style>
+
+.side {
+    border-style:solid;
+    border-width:1px;
+    padding-top:10px;
+}
+.row.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.is-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/*
+* And with max cross-browser enabled.
+* Nobody should ever write this by hand. 
+* Use a preprocesser with autoprefixing.
+*/
+.row.is-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}</style>
+{% endblock %}

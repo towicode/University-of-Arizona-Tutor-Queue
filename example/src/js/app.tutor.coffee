@@ -4,6 +4,7 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
     
     $scope.adminview = 0;
 
+    #Function that switches between Manage and Queue View.
     $scope.manage = ->
 
         if $scope.isAdmin
@@ -15,11 +16,16 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
         if x is 2
             $scope.isAdmin = true;
         return true;
+
+    # Funciton that determines if the user has selected "debugging" which is not allowed    
     $scope.error = ->
         y = false
         if `$scope.select == 4`
             y = true
         return y
+
+    # Function determines wether or not the user has selected a reason for tutoring
+    # debugging is not allowed.
     $scope.defined = ->
         x = true if $scope.select?
         y = false
@@ -28,6 +34,8 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
         return x and y
 
     $scope.newPost = new Entry()
+
+    #Saves the entry into the database
     $scope.save = ->
         $scope.newPost.class_num = $scope.class_num;
         $scope.newPost.question = $scope.question;
@@ -67,7 +75,7 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
             idx = $scope.posts.indexOf(post)
             $scope.posts.splice(idx, 1)
 
-
+    # Updates the time remaining / expired
     $scope.updateTime = () ->
         $scope.posts.$promise.then (results) ->
             angular.forEach results, (post) ->
@@ -85,12 +93,19 @@ app.controller 'EditController', ['$scope', 'Entry', ($scope, Entry) ->
 
                 post.abc = f;
 
-    $scope.ahhh = () ->
+    # Function that solves the oddness of coffee script.
+    $scope.updatePage = () ->
         $scope.updateTime()
 
-    setInterval($scope.ahhh, 1000)
+    $scope.refresh = () ->
+        console.log("5")
+        $scope.posts = Entry.query()
+
+    setInterval($scope.updatePage, 1000)
+    setInterval($scope.refresh, 5000)
 
 
+    #Gets the tutor expiration date.
     $scope.getEpoch = (post) ->
 
         y = new Date(post.created_time).getTime();

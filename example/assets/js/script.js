@@ -116,10 +116,15 @@
           });
         });
       };
-      $scope.ahhh = function() {
+      $scope.updatePage = function() {
         return $scope.updateTime();
       };
-      setInterval($scope.ahhh, 1000);
+      $scope.refresh = function() {
+        console.log("5");
+        return $scope.posts = Entry.query();
+      };
+      setInterval($scope.updatePage, 1000);
+      setInterval($scope.refresh, 5000);
       return $scope.getEpoch = function(post) {
         var y;
         y = new Date(post.created_time).getTime();
