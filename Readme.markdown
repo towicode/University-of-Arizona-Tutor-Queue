@@ -7,31 +7,36 @@ To setup and run the sample code, you're going to need `npm` from NodeJS availab
 
 ## Setup
 
-1. Install Python Requirements
+1. Enable a virtual environment.
+		pip install virtualenv
+		virtualenv queue
+		source /queue/bin/activate
+
+2. Install Python Requirements
 
         pip install -r requirements.txt
         python setup.py develop
 
-2. Install Bower + Grunt
+3. Install Bower + Grunt
 
 		npm install -g grunt-cli bower
 
-3. Install Assets
+4. Install Assets
 
         npm install
         bower install
 
-4. Compile Assets
+5. Compile Assets
 
         grunt
 
-5. Copy contents of bower_components into example/assets
+6. Copy contents of bower_components into example/assets
 
-6. Setup the Database
+7. Setup the Database
 
         make create_database;
 
-7. Run the Server
+8. Run the Server
 
         ./manage.py runserver
 
